@@ -10,8 +10,10 @@ import { coordinates } from "../../utils/constants";
 import { apiKey } from "../../utils/constants";
 import getWeather from "../../utils/weatherApi";
 import { filterWeatherData } from "../../utils/weatherApi";
+import { defaultClothingItems } from "../../utils/constants";
 
 function App() {
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999 },
@@ -34,7 +36,6 @@ function App() {
     getWeather(coordinates, apiKey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        console.log(filteredData);
 
         setWeatherData(filteredData);
       })
@@ -45,7 +46,11 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Main
+          weatherData={weatherData}
+          handleCardClick={handleCardClick}
+          clothingItems={clothingItems}
+        />
         <Footer />
         <ModalWithForm
           buttonText="Add Garment"
@@ -94,6 +99,7 @@ function App() {
                 id="Hot"
                 name="weather"
                 required
+                value="hot"
                 onChange={() => {}}
               />{" "}
               <span>Hot</span>
@@ -108,6 +114,7 @@ function App() {
                 id="Warm"
                 name="weather"
                 required
+                value="warm"
                 onChange={() => {}}
               />{" "}
               <span>Warm</span>
@@ -122,6 +129,7 @@ function App() {
                 id="Cold"
                 name="weather"
                 required
+                value="cold"
                 onChange={() => {}}
               />{" "}
               <span>Cold</span>
