@@ -1,0 +1,25 @@
+.weather__card {
+  position: relative;
+  display: flex;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.weather__card-temperature {
+  font-size: 36px;
+  line-height: 40px;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+}
+
+.weather__card-image {
+  object-fit: cover;
+  object-position: right top;
+  width: 100%;
+}

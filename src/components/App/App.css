@@ -1,0 +1,38 @@
+.page {
+  background-color: #f3f3f3;
+}
+
+.page__content {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.modal__input {
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.modal__label {
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding: none;
+}
+
+.modal__legend {
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal__label_type_radio {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__radio-input:checked + span {
+  color: black;
+}
+
+
