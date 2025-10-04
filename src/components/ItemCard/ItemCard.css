@@ -1,10 +1,12 @@
 .card {
   width: 323px;
-  border-color: aqua;
-  border-radius: 12px;
   position: relative;
   display: flex;
   justify-content: center;
+  border-radius: 12px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-width: 1px;
 }
 
 .card__name {
@@ -17,6 +19,7 @@
   border-radius: 4px;
   font-family: "Cabinet Grotesk";
   font-weight: 700;
+  font-size: 16px;
 }
 
 .card__image {

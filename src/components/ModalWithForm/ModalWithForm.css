@@ -15,22 +15,28 @@
   visibility: visible;
 }
 
-.modal__close-btn {
+.modal__grey-close-btn {
   position: absolute;
   top: 20px;
   right: 28px;
-  background-image: url(../../assets/Closeicon2.svg);
+  background-image: url(../../assets/closegrey.png);
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
 
-.modal__container {
+.modal__form-container {
   background-color: white;
-  position: relative;
   padding: 28px 28px 36px;
   max-width: 496px;
-  height: 436px;
   box-sizing: border-box;
   width: 100%;
   border-radius: 20px;
+  position: relative;
 }
 
 .modal__form {
@@ -43,6 +49,7 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-bottom: 24px;
+
 }
 
 .modal__radio-btns {
@@ -64,7 +71,7 @@
   padding-left: 16px;
   color: rgba(255, 255, 255, 1);
   font-family: "Cabinet Grotesk";
-  font-size: 700;
+  font-weight: 700;
   background-color: black;
   text-align: center;
   line-height: 20px;

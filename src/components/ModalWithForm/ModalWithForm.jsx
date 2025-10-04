@@ -13,11 +13,11 @@ function ModalWithForm({
       className={`modal ${activeModal === "add-garment" ? "modal_opened" : ""}`}
       id="form-modal"
     >
-      <div className="modal__container">
+      <div className="modal__form-container">
         <button
           onClick={closeActiveModal}
           type="button"
-          className="modal__close-btn"
+          className="modal__grey-close-btn"
         ></button>
         <h2 className="modal__title">{title}</h2>
         <form className="modal__form" id="item-form" noValidate>

@@ -25,6 +25,27 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
+  useEffect(() => {
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    const handleOverlayClick = (e) => {
+      if (e.target.classList.contains("modal")) {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("click", handleOverlayClick);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("click", handleOverlayClick);
+    };
+  }, [activeModal]);
+
   const [formFilled, setFormFilled] = useState(false);
 
   const handleCardClick = (card) => {

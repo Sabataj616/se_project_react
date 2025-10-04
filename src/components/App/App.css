@@ -12,13 +12,16 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-bottom: 24px;
+  border: none;
+  border-bottom: 1px solid;
+  background: transparent;
+  padding: 8px 0;
 }
 
 .modal__label {
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-bottom: 8px;
-  padding: none;
 }
 
 .modal__legend {
@@ -34,5 +37,3 @@
 .modal__radio-input:checked + span {
   color: black;
 }
-
-
