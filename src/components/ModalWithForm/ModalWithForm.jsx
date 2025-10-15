@@ -7,6 +7,7 @@ function ModalWithForm({
   activeModal,
   closeActiveModal,
   formFilled,
+  onSubmit,
 }) {
   return (
     <div
@@ -20,7 +21,12 @@ function ModalWithForm({
           className="modal__grey-close-btn"
         ></button>
         <h2 className="modal__title">{title}</h2>
-        <form className="modal__form" id="item-form" noValidate>
+        <form
+          onSubmit={onSubmit}
+          className="modal__form"
+          id="item-form"
+          noValidate
+        >
           {children}
           <button
             type="submit"

@@ -59,3 +59,22 @@
   padding-bottom: 32;
   padding-left: 32px;
 }
+
+.delete__button {
+    top: 522.6;
+    left: 366.32px;
+    position:absolute;
+  opacity: 1;
+  border: none;
+  color: rgba(255, 77, 0, 1);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  white-space: nowrap;
+}
