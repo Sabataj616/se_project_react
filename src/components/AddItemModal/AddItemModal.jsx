@@ -1,5 +1,5 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useForm } from "../hooks/useForm";
+import { useForm } from "../../hooks/useForm";
 
 const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
   const defautValues = {
