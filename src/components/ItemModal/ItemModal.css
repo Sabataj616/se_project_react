@@ -56,14 +56,13 @@
 }
 
 .modal__footer {
-  padding-bottom: 32;
+  padding-bottom: 32px;
   padding-left: 32px;
 }
 
 .delete__button {
-    top: 522.6;
-    left: 366.32px;
-    position:absolute;
+  left: 366.32px;
+  position: absolute;
   opacity: 1;
   border: none;
   color: rgba(255, 77, 0, 1);

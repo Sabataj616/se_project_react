@@ -1,14 +1,21 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 
 const AddItemModal = ({ activeModal, onAddItem, closeActiveModal }) => {
-  const defautValues = {
+  const defaultValues = {
     name: "",
     imageUrl: "",
     weather: "",
   };
 
-  const { values, handleChange } = useForm(defautValues);
+  const { values, handleChange, setValues } = useForm(defaultValues);
+
+  useEffect(() => {
+    if (activeModal === "add-garment") {
+      setValues(defaultValues);
+    }
+  }, [activeModal]);
 
   function handleSubmit(evt) {
     evt.preventDefault();

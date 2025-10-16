@@ -15,7 +15,7 @@ import getWeather from "../../utils/weatherApi";
 import { filterWeatherData } from "../../utils/weatherApi";
 
 import CurrentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
-import Profile from "../Profile/profile";
+import Profile from "../Profile/Profile";
 import { deleteItems, getItems, postItems } from "../../utils/api";
 function App() {
   const [metric, setMetric] = useState("F");
@@ -61,7 +61,7 @@ function App() {
         setClothingItems(
           clothingItems.filter((item) => {
             return item.id !== selectedCard.id;
-          }),
+          })
         );
         closeActiveModal();
       })
@@ -135,17 +135,18 @@ function App() {
               }
             />
             <Route
-              path="/profile"
+              path="/Profile"
               element={
                 <Profile
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
           </Routes>
           <Footer />
-          <ModalWithForm></ModalWithForm>
+          
           <AddItemModal
             activeModal={activeModal}
             closeActiveModal={closeActiveModal}
