@@ -45,7 +45,9 @@ function App() {
         setClothingItems([data, ...clothingItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Failed to create item:", error);
+      });
   };
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "F") {
@@ -56,11 +58,11 @@ function App() {
   };
 
   const deleteItemHandler = () => {
-    deleteItems(selectedCard.id)
+    deleteItems(selectedCard._id)
       .then((data) => {
         setClothingItems(
           clothingItems.filter((item) => {
-            return item.id !== selectedCard.id;
+            return item._id !== selectedCard._id;
           })
         );
         closeActiveModal();
@@ -106,7 +108,7 @@ function App() {
 
     getItems()
       .then((data) => {
-        const sortedData = data.sort((a, b) => b.id - a.id);
+        const sortedData = data.sort((a, b) => b._id - a._id);
         setClothingItems(sortedData);
       })
       .catch(console.error);
@@ -146,15 +148,15 @@ function App() {
             />
           </Routes>
           <Footer />
-          
+
           <AddItemModal
-            activeModal={activeModal}
+            isOpen={activeModal === "add-garment"}
             closeActiveModal={closeActiveModal}
             onAddItem={onAddItem}
             formFilled={formFilled}
           />
           <ItemModal
-            activeModal={activeModal}
+            isOpen={activeModal === "preview"}
             card={selectedCard}
             closeActiveModal={closeActiveModal}
             deleteItemHandler={deleteItemHandler}

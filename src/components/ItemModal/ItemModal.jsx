@@ -1,9 +1,9 @@
 import { deleteItems } from "../../utils/api";
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, card, closeActiveModal, deleteItemHandler }) {
+function ItemModal({ isOpen, card, closeActiveModal, deleteItemHandler }) {
   return (
-    <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
+    <div className={`modal ${isOpen? "modal_opened" : ""}`}>
       <div className="modal__container modal__container_preview">
         <button
           onClick={closeActiveModal}

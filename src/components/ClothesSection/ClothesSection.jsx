@@ -15,7 +15,7 @@ function ClothesSection({ clothingItems, onCardClick, handleAddClick }) {
       <ul className="clothes-section__cards">
         {clothingItems.map((item) => {
           return (
-            <ItemCard key={item.id} item={item} onCardClick={onCardClick} />
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           );
         })}
       </ul>

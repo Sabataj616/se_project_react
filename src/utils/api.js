@@ -1,14 +1,11 @@
 const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
+const handleServerResponse = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+};
 
 export const getItems = () => {
-  return fetch(`${baseUrl}/items`, { headers }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
 };
 
 export const postItems = ({ name, imageUrl, weather }) => {
@@ -20,24 +17,12 @@ export const postItems = ({ name, imageUrl, weather }) => {
       imageUrl,
       weather,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  }).then(handleServerResponse);
 };
 
 export const deleteItems = (itemID) => {
   return fetch(`${baseUrl}/items/${itemID}`, {
     method: "DELETE",
     headers,
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  }).then(handleServerResponse);
 };
