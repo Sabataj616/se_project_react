@@ -28,3 +28,22 @@
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.3);
 }
+
+.card__like-btn {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card__like-btn_active {
+  background-image: url(../public/like-Liked.png);
+}
+
+.card__like-btn_inactive {
+  background-image: url(../public/like-default.png);
+}
