@@ -1,21 +1,10 @@
 const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
 import { getToken } from "./token";
-const handleServerResponse = (res) => {
+export const handleServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
-const getHeaders = (needsAuth = false) => {
-  const headers = { "Content-Type": "application/json" };
 
-  if (needsAuth) {
-    const token = getToken();
-    if (token) {
-      headers.authorization = `Bearer ${token}`;
-    }
-  }
-
-  return headers;
-};
 export const getItems = () => {
   return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
 };

@@ -9,7 +9,7 @@ export default function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
   const isLiked = item.likes.some((id) => id === currentUser._id);
   const handleLike = () => {
-    onCardLike({ id: item._id, isLiked: !isLiked });
+    onCardLike({ id: item._id, isLiked: isLiked});
   };
   return (
     <li className="card">
@@ -20,7 +20,7 @@ export default function ItemCard({ item, onCardClick, onCardLike }) {
         src={item.imageUrl}
         alt={item.name}
       />
-      {currentUser && (
+      {isLoggedIn && currentUser && (
         <button
           onClick={handleLike}
           type="button"

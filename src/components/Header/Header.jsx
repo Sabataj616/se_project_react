@@ -1,8 +1,7 @@
 import "./Header.css";
 import Logo from "../../assets/Logo.png";
 
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
@@ -78,7 +77,7 @@ function Header({
         </button>
       )}
       {isLoggedIn && currentUser && (
-        <Link className="header__link" to="/profile">
+        <Link className="header__link" to="/Profile">
           <div className="header__user-container">
             <p className="header__username">{currentUser.name}</p>
             {currentUser.avatar ? (
@@ -89,7 +88,7 @@ function Header({
               />
             ) : (
               <div className="avatar-placeholder">
-                {currentUser.name.slice(0, 1)}
+                {currentUser?.name?.slice(0, 1) || '👤'}
               </div>
             )}
           </div>

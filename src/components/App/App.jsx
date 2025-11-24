@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoutes";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -7,7 +7,7 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+
 import * as auth from "../../utils/auth";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
@@ -33,7 +33,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [metric, setMetric] = useState("F");
+  
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState({
     _id: "",
@@ -63,8 +63,8 @@ function App() {
       imageUrl: data.imageUrl,
       weather: data.weather,
     };
-
-    postItems(newCardData)
+    const token = getToken();
+    postItems(newCardData, token)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
         closeActiveModal();
@@ -102,8 +102,9 @@ function App() {
   };
 
   const deleteItemHandler = () => {
-    deleteItems(selectedCard._id)
-      .then((data) => {
+    const token = getToken();
+    deleteItems(selectedCard._id, token)
+      .then(() => {
         setClothingItems(
           clothingItems.filter((item) => {
             return item._id !== selectedCard._id;
@@ -157,16 +158,24 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleRegistration = ({ name, email, password, confirmPassword }) => {
+  const handleRegistration = ({
+    name,
+    avatar,
+    email,
+    password,
+    confirmPassword,
+  }) => {
     if (password === confirmPassword) {
       auth
-        .register(name, password, email)
+        .register(name, avatar, email, password)
         .then(() => {
-          closeActiveModal();
-          auth
+          return auth
             .authorize(email, password)
-            .then(() => {
+            .then((data) => {
+              localStorage.setItem("jwt", data.token);
+              setCurrentUser(data.user);
               setIsLoggedIn(true);
+              closeActiveModal();
             })
             .catch(console.error);
         })
@@ -183,9 +192,9 @@ function App() {
       .authorize(email, password)
       .then((data) => {
         if (data.jwt) {
-          setToken(data.jwt); 
-          setCurrentUser({ email: data.email, name: data.name }); 
-          setIsLoggedIn(true); 
+          setToken(data.jwt);
+          setCurrentUser({ email: data.email, name: data.name });
+          setIsLoggedIn(true);
 
           const redirectPath = location.state?.from?.pathname;
           navigate(redirectPath);
@@ -199,7 +208,6 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate("/");
-    
   };
   useEffect(() => {
     const jwt = getToken();
@@ -210,9 +218,9 @@ function App() {
 
     auth
       .checkToken(jwt)
-      .then(({ email, name }) => {
+      .then((user) => {
         setIsLoggedIn(true);
-        setCurrentUser({ email, name });
+        setCurrentUser(user);
       })
       .catch(console.error);
   }, []);
@@ -235,7 +243,7 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser }}>
+    <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
         value={{ handleToggleSwitchChange, currentTemperatureUnit }}
       >
@@ -259,7 +267,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
-                    onCardLike={handleCardLike}
+                    handleCardLike={handleCardLike}
                   />
                 }
               />
