@@ -77,7 +77,7 @@ function Header({
         </button>
       )}
       {isLoggedIn && currentUser && (
-        <Link className="header__link" to="/Profile">
+        <Link className="header__link" to="/profile">
           <div className="header__user-container">
             <p className="header__username">{currentUser.name}</p>
             {currentUser.avatar ? (
