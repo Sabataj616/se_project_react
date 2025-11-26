@@ -2,7 +2,7 @@ import "./ItemCard.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
 
-export default function ItemCard({ item, onCardClick, onCardLike }) {
+export default function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
   const handleCardClick = () => {
     onCardClick(item);
   };

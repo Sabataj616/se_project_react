@@ -1,13 +1,24 @@
 import Sidebar from "../Sidebar/Sidebar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
-function Profile({ clothingItems, onCardClick, handleAddClick }) {
+
+function Profile({
+  clothingItems,
+  onCardClick,
+  handleAddClick,
+  handleEditProfileClick,
+  handleSignOut,
+  isLoggedIn,
+}) {
   return (
     <section className="profile">
-      <Sidebar />
-      <EditProfileModal />
+      <Sidebar
+        handleEditProfileClick={handleEditProfileClick}
+        handleSignOut={handleSignOut}
+        isLoggedIn={isLoggedIn}
+      />
+      
       <ClothesSection
         clothingItems={clothingItems}
         onCardClick={onCardClick}

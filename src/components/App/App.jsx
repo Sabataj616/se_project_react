@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoutes";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -33,7 +34,8 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState({
     _id: "",
@@ -151,7 +153,7 @@ function App() {
     };
   }, [activeModal]);
 
-  const [formFilled, setFormFilled] = useState(false);
+  const [formFilled] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -191,12 +193,12 @@ function App() {
     auth
       .authorize(email, password)
       .then((data) => {
-        if (data.jwt) {
-          setToken(data.jwt);
-          setCurrentUser({ email: data.email, name: data.name });
+        if (data.token) {
+          setToken(data.token);
+          setCurrentUser(data.user);
           setIsLoggedIn(true);
 
-          const redirectPath = location.state?.from?.pathname;
+          const redirectPath = location.state?.from?.pathname || "/profile";
           navigate(redirectPath);
         }
       })
@@ -268,6 +270,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleCardLike={handleCardLike}
+                    isLoggedIn={isLoggedIn}
                   />
                 }
               />

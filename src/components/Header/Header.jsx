@@ -1,7 +1,6 @@
 import "./Header.css";
 import Logo from "../../assets/Logo.png";
 
-
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
@@ -12,8 +11,7 @@ function Header({
   ToggleSwitch,
   handleLogInClick,
   handleRegisterClick,
-  handleEditProfileClick,
-  handleSignOut,
+
   isLoggedIn,
 }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -40,24 +38,7 @@ function Header({
           + Add clothes
         </button>
       )}
-      {isLoggedIn && (
-        <button
-          onClick={handleEditProfileClick}
-          type="button"
-          className="header__add-clothes-btn"
-        >
-          Edit Profile
-        </button>
-      )}
-      {isLoggedIn && (
-        <button
-          onClick={handleSignOut}
-          type="button"
-          className="header__add-clothes-btn"
-        >
-          Sign Out
-        </button>
-      )}
+
       {!isLoggedIn && (
         <button
           onClick={handleRegisterClick}
@@ -88,7 +69,7 @@ function Header({
               />
             ) : (
               <div className="avatar-placeholder">
-                {currentUser?.name?.slice(0, 1) || '👤'}
+                {currentUser?.name?.slice(0, 1) || "👤"}
               </div>
             )}
           </div>
