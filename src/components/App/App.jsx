@@ -282,6 +282,10 @@ function App() {
                       clothingItems={clothingItems}
                       onCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
+                      isLoggedIn={isLoggedIn}
+                      onCardLike={onCardLike}
+                      handleEditProfileClick={handleEditProfileClick}
+                      handleSignOut={handleSignOut}
                     />
                   </ProtectedRoute>
                 }
