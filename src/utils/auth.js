@@ -1,15 +1,29 @@
 export const BASE_URL = "http://localhost:3001";
 import { handleServerResponse } from "./api";
 
-export const register = (name, avatar, email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, avatar, email, password }),
-  }).then(handleServerResponse);
+export const register = async (userData) => {
+  try {
+    const response = await fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.log("Server error response:", errorData);
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorData}`
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Registration error:", error);
+    throw error;
+  }
 };
 
 export const authorize = (email, password) => {

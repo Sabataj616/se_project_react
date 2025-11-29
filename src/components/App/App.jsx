@@ -66,9 +66,10 @@ function App() {
       weather: data.weather,
     };
     const token = getToken();
+
     postItems(newCardData, token)
-      .then((data) => {
-        setClothingItems([data, ...clothingItems]);
+      .then((res) => {
+        setClothingItems([res.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -84,18 +85,18 @@ function App() {
   };
 
   const handleCardLike = ({ id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
-
     !isLiked
-      ? addCardLike(id, token)
-          .then((updatedCard) => {
+      ? addCardLike(id)
+          .then((response) => {
+            const updatedCard = response.data;
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
             );
           })
           .catch((err) => console.log(err))
-      : removeCardLike(id, token)
-          .then((updatedCard) => {
+      : removeCardLike(id)
+          .then((response) => {
+            const updatedCard = response.data;
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
             );
@@ -169,7 +170,7 @@ function App() {
   }) => {
     if (password === confirmPassword) {
       auth
-        .register(name, avatar, email, password)
+        .register({ name, avatar, email, password })
         .then(() => {
           return auth
             .authorize(email, password)
@@ -195,12 +196,17 @@ function App() {
       .then((data) => {
         if (data.token) {
           setToken(data.token);
-          setCurrentUser(data.user);
-          setIsLoggedIn(true);
 
-          const redirectPath = location.state?.from?.pathname || "/profile";
-          navigate(redirectPath);
+          return auth.checkToken(data.token);
         }
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+
+        const redirectPath = location.state?.from?.pathname || "/profile";
+        navigate(redirectPath);
       })
       .catch(console.error);
   };
@@ -238,7 +244,11 @@ function App() {
 
     getItems()
       .then((data) => {
-        const sortedData = data.sort((a, b) => b._id - a._id);
+        if (data.data) {
+        }
+        
+
+        const sortedData = [...data.data].sort((a, b) => b._id - a._id);
         setClothingItems(sortedData);
       })
       .catch(console.error);
@@ -275,7 +285,7 @@ function App() {
                 }
               />
               <Route
-                path="/Profile"
+                path="/profile"
                 element={
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
@@ -283,7 +293,7 @@ function App() {
                       onCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
                       isLoggedIn={isLoggedIn}
-                      onCardLike={onCardLike}
+                      onCardLike={handleCardLike}
                       handleEditProfileClick={handleEditProfileClick}
                       handleSignOut={handleSignOut}
                     />

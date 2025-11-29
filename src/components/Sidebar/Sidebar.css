@@ -1,10 +1,29 @@
+.sidebar__edit-container {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
 .sidebar__user-container {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
+.sidebar__change-profile-btn {
+  margin-left: auto;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: 0%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .sidebar__avatar {
+  border-radius: 30px;
   width: 56px;
   height: 56px;
 }

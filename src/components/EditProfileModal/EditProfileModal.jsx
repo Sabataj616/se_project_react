@@ -10,7 +10,7 @@ const EditProfileModal = ({ isOpen, onEditProfile, closeActiveModal }) => {
     name: currentUser?.name || "",
     avatar: currentUser?.avatar || "",
   };
-
+  
   const { values, handleChange, setValues } = useForm(defaultValues);
 
   useEffect(() => {
@@ -19,6 +19,8 @@ const EditProfileModal = ({ isOpen, onEditProfile, closeActiveModal }) => {
     }
   }, [isOpen]);
 
+  const formFilled = (values.name === "" || values.avatar === "" ? false : true)
+
   function handleSubmit(evt) {
     evt.preventDefault();
     onEditProfile(values);
@@ -26,11 +28,12 @@ const EditProfileModal = ({ isOpen, onEditProfile, closeActiveModal }) => {
 
   return (
     <ModalWithForm
-      buttonText="Edit Profile"
+      buttonText="Save changes"
       title="Edit Profile"
       closeActiveModal={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      formFilled={formFilled}
     >
       <label htmlFor="user-name-input" className="modal__label">
         Name

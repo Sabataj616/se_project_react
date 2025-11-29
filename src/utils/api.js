@@ -9,7 +9,7 @@ export const getItems = () => {
   return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
 };
 
-export const postItems = ({ data, token }) => {
+export const postItems = (data, token) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -17,7 +17,9 @@ export const postItems = ({ data, token }) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      data,
+      name: data.name,
+      weather: data.weather,
+      imageUrl: data.imageUrl,
     }),
   }).then(handleServerResponse);
 };

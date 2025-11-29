@@ -16,6 +16,7 @@ const LoginModal = ({ isOpen, onLogin, closeActiveModal }) => {
     }
   }, [isOpen]);
 
+  const formFilled = (values.email === "" || values.password === "" ? false : true)
   function handleSubmit(evt) {
     evt.preventDefault();
     onLogin(values);
@@ -28,6 +29,7 @@ const LoginModal = ({ isOpen, onLogin, closeActiveModal }) => {
       closeActiveModal={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      formFilled={formFilled}
     >
       <label htmlFor="user-email-input" className="modal__label">
         Email

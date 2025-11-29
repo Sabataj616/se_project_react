@@ -57,19 +57,21 @@ function Header({
           Log In
         </button>
       )}
+      
       {isLoggedIn && currentUser && (
+        
         <Link className="header__link" to="/profile">
           <div className="header__user-container">
-            <p className="header__username">{currentUser.name}</p>
-            {currentUser.avatar ? (
+            <p className="header__username">{currentUser.data.name}</p>
+            {currentUser.data.avatar ? (
               <img
-                src={currentUser.avatar}
+                src={currentUser.data.avatar}
                 alt="Avatar"
                 className="header__avatar"
               />
             ) : (
               <div className="avatar-placeholder">
-                {currentUser?.name?.slice(0, 1) || "👤"}
+                {currentUser?.data?.name?.slice(0, 1) || "👤"}
               </div>
             )}
           </div>

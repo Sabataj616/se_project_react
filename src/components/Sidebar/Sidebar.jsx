@@ -5,32 +5,44 @@ import CurrentUserContext from "../../contexts/currentUserContext";
 
 function Sidebar({ isLoggedIn, handleEditProfileClick, handleSignOut }) {
   const currentUser = useContext(CurrentUserContext);
+
   return (
     <aside className="sidebar">
-      <div className="sidebar__user-container">
-        <img
-          src={currentUser.avatar}
-          alt="Avatar"
-          className="sidebar__avatar"
-        />
-        <p className="sidebar__username">{currentUser.name}</p>
-      </div>
+      {isLoggedIn && currentUser && (
+        <div className="sidebar__user-container">
+          {currentUser.data?.avatar ? (
+            <img
+              src={currentUser.data.avatar}
+              alt="Avatar"
+              className="sidebar__avatar"
+            />
+          ) : (
+            <div className="avatar-placeholder">
+              {currentUser?.name?.slice(0, 1) || "👤"}
+            </div>
+          )}
+
+          <p className="sidebar__username">{currentUser.data.name}</p>
+        </div>
+      )}
       {isLoggedIn && (
+        <div className="sidebar__edit-container">
         <button
           onClick={handleEditProfileClick}
           type="button"
-          className="header__add-clothes-btn"
+          className="sidebar__change-profile-btn"
         >
-          Edit Profile
+          Change profile data
         </button>
+        </div>
       )}
       {isLoggedIn && (
         <button
           onClick={handleSignOut}
           type="button"
-          className="header__add-clothes-btn"
+          className="sidebar__change-profile-btn"
         >
-          Sign Out
+          Log Out
         </button>
       )}
     </aside>

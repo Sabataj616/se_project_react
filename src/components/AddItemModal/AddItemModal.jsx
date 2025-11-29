@@ -16,7 +16,10 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
       setValues(defaultValues);
     }
   }, [isOpen]);
-
+  const formFilled =
+    values.name === "" || values.imageUrl === "" || values.weather === ""
+      ? false
+      : true;
   function handleSubmit(evt) {
     evt.preventDefault();
     onAddItem(values);
@@ -29,6 +32,7 @@ const AddItemModal = ({ isOpen, onAddItem, closeActiveModal }) => {
       closeActiveModal={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      formFilled={formFilled}
     >
       <label htmlFor="item-name-input" className="modal__label">
         Name
