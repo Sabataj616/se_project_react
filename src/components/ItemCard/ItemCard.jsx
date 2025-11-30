@@ -20,15 +20,14 @@ export default function ItemCard({
   };
   return (
     <li className="card">
-      {isLoggedIn && currentUser && (
-        <img
-          onClick={handleCardClick}
-          className="card__image"
-          src={item.imageUrl}
-          alt={item.name}
-        />
-      )}
-      {isLoggedIn && currentUser && <h2 className="card__name">{item.name}</h2>}
+      <img
+        onClick={handleCardClick}
+        className="card__image"
+        src={item.imageUrl}
+        alt={item.name}
+      />
+
+      <h2 className="card__name">{item.name}</h2>
       {isLoggedIn && currentUser && (
         <button
           onClick={handleLike}

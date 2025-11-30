@@ -8,6 +8,8 @@ function ModalWithForm({
   closeActiveModal,
   formFilled,
   onSubmit,
+  onToggleModal,
+  activeModal,
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`} id="form-modal">
@@ -25,14 +27,26 @@ function ModalWithForm({
           noValidate
         >
           {children}
-          <button
-            type="submit"
-            className={`modal__submit-btn ${
-              formFilled ? "" : "modal__submit-btn_disabled"
-            }`}
-          >
-            {buttonText}
-          </button>
+          <div className="modal__submit-btn_container">
+            <button
+              type="submit"
+              className={`modal__submit-btn ${
+                formFilled ? "" : "modal__submit-btn_disabled"
+              }`}
+            >
+              {buttonText}
+            </button>
+            {(activeModal === "log-in" || activeModal === "register") && (
+              <button
+                onClick={onToggleModal}
+                type="button"
+                className="modal__submit-btn_toggle"
+              >
+                {activeModal === "log-in" && "or Sign Up"}
+                {activeModal === "register" && "or Log In"}
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>

@@ -49,7 +49,6 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-bottom: 24px;
-
 }
 
 .modal__radio-btns {
@@ -59,8 +58,13 @@
   padding: 0;
 }
 
+.modal__submit-btn_container {
+  gap: 2px;
+}
+
 .modal__submit-btn {
   max-width: 124px;
+  min-width: 86px;
   height: 36px;
   opacity: 1;
   border-radius: 4px;
@@ -87,4 +91,24 @@
 .modal__submit-btn_disabled {
   opacity: 50%;
   margin: 12px 0;
+}
+
+.modal__submit-btn_toggle {
+  margin-left: auto;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 24px;
+  letter-spacing: 0%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #00000080;
+  height: 40px;
+}
+
+.modal__submit-btn_toggle:hover {
+  color: black;
+  opacity: 0.8;
 }

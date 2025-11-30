@@ -59,6 +59,13 @@ function App() {
     setActiveModal("");
   };
 
+  const onToggleModal = () => {
+    if (activeModal === "log-in") {
+      setActiveModal("register");
+    } else {
+      setActiveModal("log-in");
+    }
+  };
   const onAddItem = (data) => {
     const newCardData = {
       name: data.name,
@@ -161,31 +168,6 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleRegistration = ({
-    name,
-    avatar,
-    email,
-    password,
-    confirmPassword,
-  }) => {
-    if (password === confirmPassword) {
-      auth
-        .register({ name, avatar, email, password })
-        .then(() => {
-          return auth
-            .authorize(email, password)
-            .then((data) => {
-              localStorage.setItem("jwt", data.token);
-              setCurrentUser(data.user);
-              setIsLoggedIn(true);
-              closeActiveModal();
-            })
-            .catch(console.error);
-        })
-        .catch(console.error);
-    }
-  };
-
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
@@ -209,6 +191,23 @@ function App() {
         navigate(redirectPath);
       })
       .catch(console.error);
+  };
+
+  const handleRegistration = ({
+    name,
+    avatar,
+    email,
+    password,
+    confirmPassword,
+  }) => {
+    if (password === confirmPassword) {
+      auth
+        .register({ name, avatar, email, password })
+        .then(() => {
+          handleLogin({ email, password });
+        })
+        .catch(console.error);
+    }
   };
 
   const handleSignOut = () => {
@@ -246,7 +245,6 @@ function App() {
       .then((data) => {
         if (data.data) {
         }
-        
 
         const sortedData = [...data.data].sort((a, b) => b._id - a._id);
         setClothingItems(sortedData);
@@ -319,11 +317,15 @@ function App() {
               isOpen={activeModal === "log-in"}
               closeActiveModal={closeActiveModal}
               onLogin={handleLogin}
+              activeModal={activeModal}
+              onToggleModal={onToggleModal}
             />
             <RegisterModal
               isOpen={activeModal === "register"}
               closeActiveModal={closeActiveModal}
               onRegister={handleRegistration}
+              activeModal={activeModal}
+              onToggleModal={onToggleModal}
             />
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}

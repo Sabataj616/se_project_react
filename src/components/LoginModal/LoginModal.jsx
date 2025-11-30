@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect } from "react";
 
-const LoginModal = ({ isOpen, onLogin, closeActiveModal }) => {
+const LoginModal = ({ isOpen, onLogin, closeActiveModal, onToggleModal, activeModal }) => {
   const defaultValues = {
     email: "",
     password: "",
@@ -16,7 +16,8 @@ const LoginModal = ({ isOpen, onLogin, closeActiveModal }) => {
     }
   }, [isOpen]);
 
-  const formFilled = (values.email === "" || values.password === "" ? false : true)
+  const formFilled =
+    values.email === "" || values.password === "" ? false : true;
   function handleSubmit(evt) {
     evt.preventDefault();
     onLogin(values);
@@ -30,6 +31,8 @@ const LoginModal = ({ isOpen, onLogin, closeActiveModal }) => {
       isOpen={isOpen}
       onSubmit={handleSubmit}
       formFilled={formFilled}
+      onToggleModal={onToggleModal}
+      activeModal={activeModal}
     >
       <label htmlFor="user-email-input" className="modal__label">
         Email

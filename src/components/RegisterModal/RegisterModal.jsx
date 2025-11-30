@@ -2,12 +2,18 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import { useEffect } from "react";
 
-const RegisterModal = ({ isOpen, onRegister, closeActiveModal }) => {
+const RegisterModal = ({
+  isOpen,
+  onRegister,
+  closeActiveModal,
+  onToggleModal,
+  activeModal,
+}) => {
   const defaultValues = {
     name: "",
     avatar: "",
     email: "",
-    password:"",
+    password: "",
     confirmPassword: "",
   };
 
@@ -31,6 +37,8 @@ const RegisterModal = ({ isOpen, onRegister, closeActiveModal }) => {
       closeActiveModal={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      onToggleModal={onToggleModal}
+      activeModal={activeModal}
     >
       <label htmlFor="register-name-input" className="modal__label">
         Name
