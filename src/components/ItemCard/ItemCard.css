@@ -46,9 +46,11 @@
 }
 
 .card__like-btn_active {
-  background-image: url(../public/like-Liked.png);
+  background-image: url(/like-Liked.png);
+  
 }
 
 .card__like-btn_inactive {
-  background-image: url(../public/like-default.png);
+  background-image: url(/like-default.png);
+  
 }

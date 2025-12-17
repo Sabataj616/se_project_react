@@ -1,4 +1,7 @@
-export const BASE_URL = "http://localhost:3001";
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr25.twilightparadox.com"
+    : "http://localhost:3001";
 import { handleServerResponse } from "./api";
 
 export const register = async (userData) => {
